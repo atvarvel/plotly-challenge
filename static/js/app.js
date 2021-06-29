@@ -40,7 +40,7 @@ function createPlots(sample) {
             margin: { t: 30, l: 150 }
         };
         
-        Plotly.plot("bar", barData, barLayout);
+        Plotly.newPlot("bar", barData, barLayout);
 
         var bubbleData = [{
             x: ids,
@@ -60,7 +60,7 @@ function createPlots(sample) {
             hovermode: "closest"
         };
 
-        Plotly.plot("bubble", bubbleData, bubbleLayout);
+        Plotly.newPlot("bubble", bubbleData, bubbleLayout);
     });
 }
 
@@ -91,9 +91,3 @@ selector.on("change", function() {
     createPlots(selectedValue);
     sampleMetadata(selectedValue);
 });
-
-// function changeOption(newSample) {
-//     createPlots(newSample);
-//     sampleMetadata(newSample);
-// }
-
