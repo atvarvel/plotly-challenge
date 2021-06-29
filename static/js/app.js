@@ -1,7 +1,7 @@
 // Get sample data for demographic info panel
 function sampleMetadata(sample) {
     // Read in json file
-    d3.json("../samples.json").then((data) => {
+    d3.json("../../samples.json").then((data) => {
         var metadata = data.metadata;
         // Filter data based on current sample
         var filteredData = metadata.filter(sampleObject => sampleObject.id == sample);
@@ -19,7 +19,7 @@ function sampleMetadata(sample) {
 
 // Create Bar and Bubble plots
 function createPlots(sample) {
-    d3.json("../samples.json").then((data) => {
+    d3.json("../../samples.json").then((data) => {
         var samples = data.samples;
         // Filter data based on current sample
         var filteredData = samples.filter(sampleObject => sampleObject.id == sample);
@@ -70,7 +70,7 @@ function createPlots(sample) {
 function init() {
     var selector = d3.select("#selDataset");
 
-    d3.json("../samples.json").then((data) => {
+    d3.json("../../samples.json").then((data) => {
         var names = data.names;
         names.forEach((sample) => {
             selector
