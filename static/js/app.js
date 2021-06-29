@@ -40,5 +40,60 @@ function createPlots(sample) {
             margin: { t: 30, l: 150 }
         };
         
+        Plotly.plot("bar", barData, barLayout);
+
+        var bubbleData = [{
+            x: ids,
+            y: values,
+            text: labels,
+            mode: "markers",
+            marker: {
+                color: ids,
+                size: values
+            }
+        }];
+
+        var bubbleLayout = {
+            title: "Bacteria Cultures Per Sample",
+            margin: { t: 30 },
+            xaxis: { title: "OTU ID" },
+            hovermode: "closest"
+        };
+
+        Plotly.plot("bubble", bubbleData, bubbleLayout);
     });
 }
+
+function init() {
+    var selector = d3.select("#selDataset");
+
+    d3.json("../samples.json").then((data) => {
+        var names = data.names;
+        names.forEach((sample) => {
+            selector
+                .append("option")
+                .text(sample)
+                .property("value", sample);
+        });
+
+        var firstSample = names[0];
+        createPlots(firstSample);
+        sampleMetadata(firstSample);
+    });
+}
+
+init();
+
+var selector = d3.select("#selDataset");
+
+selector.on("change", function() {
+    var selectedValue = selector.property("value");
+    createPlots(selectedValue);
+    sampleMetadata(selectedValue);
+});
+
+// function changeOption(newSample) {
+//     createPlots(newSample);
+//     sampleMetadata(newSample);
+// }
+
